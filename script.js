@@ -27,7 +27,22 @@ generateEl.addEventListener('click', () => {
 })
 
 function generatePassword(lower, upper, number, symbol, length) {
-    
+    let randomIn = [];
+
+    if (lowercaseEl.Checked) randomIn.push(lower);
+
+    if (uppercaseEl.Checked) randomIn.push(upper);
+
+    if (numbersEl.Checked) randomIn.push(number);
+
+    if (symbolsEl.Checked) randomIn.push(symbol);
+
+    let password = " ";
+
+    for (let i = 0 ; i <= length; i++){
+        password += randomIn[Math.floor(Math.random()* randomIn.length)]();
+    }
+    resultEl.textContent = password;
 }
 
 function getRandomLower() {
