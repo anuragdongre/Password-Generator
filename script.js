@@ -1,58 +1,79 @@
-const resultEl = document.getElementById('result')
-const lengthEl = document.getElementById('length')
-const uppercaseEl = document.getElementById('uppercase')
-const lowercaseEl = document.getElementById('lowercase')
-const numbersEl = document.getElementById('numbers')
-const symbolsEl = document.getElementById('symbols')
-const generateEl = document.getElementById('generate')
-const clipboardEl = document.getElementById('clipboard')
+const resultEl = document.getElementById("result");
+const lengthEl = document.getElementById("length");
+const uppercaseEl = document.getElementById("uppercase");
+const lowercaseEl = document.getElementById("lowercase");
+const numbersEl = document.getElementById("numbers");
+const symbolsEl = document.getElementById("symbols");
+const generateEl = document.getElementById("generate");
+const clipboardEl = document.getElementById("clipboard");
 
 const randomFunc = {
-    lower: getRandomLower,
-    upper: getRandomUpper,
-    number: getRandomNumber,
-    symbol: getRandomSymbol
-}
+  lower: getRandomLower,
+  upper: getRandomUpper,
+  number: getRandomNumber,
+  symbol: getRandomSymbol,
+};
 
-clipboardEl.addEventListener('click', () => {
-    const copyTest = resultEl.textContent;
-    navigator.clipboard.writeText(copyTest).then(()=>{
-        // alert the user that the action took place.
-        alert("copied to clipbord");
-    });
+clipboardEl.addEventListener("click", () => {
+  const copyText = resultEl.textContent;
+  navigator.clipboard.writeText(copyText).then(() => {
+    // Alert the user that the action took place.
+    alert("Copied to clipboard");
+  });
 });
 
-generateEl.addEventListener('click', () => {
-    
-})
+generateEl.addEventListener("click", () => {
+  generatePassword(
+    randomFunc.lower,
+    randomFunc.upper,
+    randomFunc.number,
+    randomFunc.symbol,
+    lengthEl.value
+  );
+});
 
 function generatePassword(lower, upper, number, symbol, length) {
-    let randomIn = [];
+  let randomIn = [];
 
-    if (lowercaseEl.Checked) randomIn.push(lower);
+  if (lowercaseEl.checked) randomIn.push(lower);
 
-    if (uppercaseEl.Checked) randomIn.push(upper);
+  if (uppercaseEl.checked) randomIn.push(upper);
 
-    if (numbersEl.Checked) randomIn.push(number);
+  if (numbersEl.checked) randomIn.push(number);
 
-    if (symbolsEl.Checked) randomIn.push(symbol);
+  if (symbolsEl.checked) randomIn.push(symbol);
 
-    let password = " ";
+  let password = "";
 
-    for (let i = 0 ; i <= length; i++){
-        password += randomIn[Math.floor(Math.random()* randomIn.length)]();
-    }
-    resultEl.textContent = password;
+  for (let i = 0; i <= length; i++) {
+    password += randomIn[Math.floor(Math.random() * randomIn.length)]();
+  }
+  resultEl.textContent = password;
 }
 
 function getRandomLower() {
+  const randomLower = "qwertyuioplkjhgfdsazxcvbnm";
+  return randomLower[Math.floor(Math.random() * randomLower.length)];
 }
 
 function getRandomUpper() {
+  const randomUpper = "QWERTYUIOPLKJHGFDSAZXCVBNM";
+  return randomUpper[Math.floor(Math.random() * randomUpper.length)];
 }
 
 function getRandomNumber() {
+  const randomNumber = "1234567890";
+  return randomNumber[Math.floor(Math.random() * randomNumber.length)];
 }
 
 function getRandomSymbol() {
+  const randomSymbol = "@#$&";
+  return randomSymbol[Math.floor(Math.random() * randomSymbol.length)];
 }
+
+// console.log(
+//   getRandomLower(),
+//   getRandomUpper(),
+//   getRandomNumber(),
+//   getRandomSymbol()
+// );
